@@ -1,0 +1,15 @@
+acd_NO,NO:NO,0.001
+acd_NO2,NO2:NO2,0.001
+acd_O3,O3:O3,1.
+toga_CH2O,FORM:FORM,0.001
+zhou_HNO3,HNO3:HNO3,0.001
+ptrms_isoprene,ISOP:ISOP,1.
+toga_Methanol,MEOH:MEOH,0.001
+ptrms_methanol,MEOH:MEOH,1.
+toga_Acetaldehyde,ALD2:ALD2,0.001
+ptrms_acetaldehyde,ALD2:ALD2,1.
+toga_Acetone,ACET:ACET,0.001
+toga_Benzene,BENZ:BENZ,0.001
+toga_Propane,PRPA:PRPA,0.001
+ptrms_sum_of_monoterpenes,TERP:TERP,1.
+ptrms_MVK_MACR,ISPD+HPLD:HPLD:ISPD,1.

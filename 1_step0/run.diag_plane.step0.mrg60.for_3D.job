@@ -1,0 +1,24 @@
+#!/bin/csh -f
+
+limit stacksize unlimited
+setenv MPSTKZ 500000000
+setenv OPENBLAS_NUM_THREADS 1
+
+set outpath = ./outputs
+mkdir -p $outpath
+
+set lemis = False # If true, layer index set to 1 when the altitude is missing.
+set itzon = 6 # model time zone CST = 6, UTC = 0
+set met3d_a = "/home/jjung/camx/inputs/met/camx.3d.wrf.12km." # Set dir
+set met3d_z = ".28lay.bin"
+set met2d   = "/home/jjung/camx/inputs/landuse/camx.lu_lai.12k_01.lw.bin" # Set dir
+set inpath = "/home/jjung/aircraft_MPE/python/obs_data/mrg60_20130603-20130714_R4" # Set dir
+set outfile = $outpath/coords.SAS.mrg60_C130.for_3D.txt
+rm -fv $outfile
+
+foreach plane ( $inpath/mrg60_C130_2013????_R4.ict )
+  set yyyymmdd = `echo $plane:t:r | cut -c12-19`
+  echo "Preparing text file for $yyyymmdd"
+  ./diag_plane.mrg60.step0.py $lemis temp.txt $met3d_a $met3d_z $met2d $plane $itzon $yyyymmdd
+  cat temp.txt >> $outfile
+end # foreach - infile

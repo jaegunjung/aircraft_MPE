@@ -1,0 +1,21 @@
+#!/bin/csh -f
+
+limit stacksize unlimited
+setenv MPSTKZ 500000000
+setenv OPENBLAS_NUM_THREADS 1
+
+set outpath = ./out_data/camx
+mkdir -p $outpath
+
+set infile_a = "/home/jjung/camx/output/2013_megan2.1_org_01/camx.2013_megan2.1_org_01.camx6p4.cb6r4." # Set dir
+set infile_z = ".avrg.grd02"
+set file_plane_a = "/home/jjung/aircraft_MPE/python/obs_data/mrg60_20130603-20130714_R4/mrg60_C130_" # Set dir
+set file_plane_z = "_R4.ict"
+set flight_path = ../1_step0/outputs/coords.SAS.mrg60_C130.for_3D.txt
+set mapping = spc_matching.mrgall.v2.a1.txt
+set sfactor = 1000. # Use 1000. to convert CAMx model unit from ppm to ppb. Use 1 for MEGAN.
+set lyyyyjjj = False # True if CAMx file name has yyyyjjj. False if CAMx file name has yyyymmdd.
+set outfile = $outpath/vars_megan2.1_org_01.vs.plane_mrg60
+rm -fv $outfile.{npz,txt}
+
+./diag_plane.c130.extract.py $outfile $infile_a $infile_z $file_plane_a $file_plane_z $flight_path $mapping $sfactor $lyyyyjjj
